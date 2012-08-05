@@ -32,6 +32,9 @@ app.configure('production', function(){
 
 app.get('/', routes.index);
 app.get('/getLastVersion', routes.getLastVersion);
+app.get('/getLastVersion_beta', routes.getLastVersion_beta);
+app.post('/addVersion', routes.addVersion);
+app.get('/checkUpdate', routes.checkUpdate);
 
 app.listen(3000, function(){
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

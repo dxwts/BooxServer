@@ -1,15 +1,49 @@
 <div>
 	
 	<form action="/addVersion" method="post">
-		<label for="version[name]">版本编号：</label>
-		<input name="version[name]" id="version[name]" type="text" />
-		<label for="version[url]">下载地址：</label>
-		<input name="version[url]" id="version[url]" type="text" />
-		<label for="version[change_log]">版本变更：</label>
-		<textarea name="version[change_log]" id="version[change_log]"></textarea>
+		<label for="version[version]">版本编号：</label><br />
+		<input name="version[version]" id="version[version]" type="text" /><br />
+		<label for="version[version_date]">发布日期：</label><br />
+		<input type="date" name="version[date]" id="version[date]" /><br />
+		<label for="version[url]">下载地址：</label><br />
+		<input name="version[url]" id="version[url]" type="text" /><br />
+		<label for="version[change_log]">版本变更：</label><br />
+		<textarea name="version[change_log]" id="version[change_log]"></textarea><br />
+		<label>添加文件:</label><br />
+		<div class="file_list" id="file_list">
+			<p><span>name</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>Url</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>size</span><input type="button" value="delete" /></p>
+			<p><span>name</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>Url</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>size</span><input type="button" value="delete" /></p>
+			<p><span>name</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>Url</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>size</span><input type="button" value="delete" /></p>
+		</div>
+		<input type="button" value="新文件" onclick="$('.new_div').show()"/><br />
 		<input type="submit" value="提交" />
 	</form>
 	
+	<div class="new_div">
+		<label for="file_name">文件名:</label><br />
+		<input type="text" name="file_name" id="file_name" /><br />
+		<label for="file_url">下载地址：</label><br />
+		<input type="text" name="file_url" id="file_url"/><br />
+		<input type="button" value="添加"  onclick="add_file()"/>
+		<input type="button" value="取消" onclick="$('.new_div').hide()"/>
+	</div>
+	<style>
+		.new_div{
+			display:none
+		}
+	</style>
 	
-	<a href="/getLastVersion">getLastVersion</a>
+	<script>
+	var fileList = new Array();
+	function add_file () {
+		var name = $("#file_name").val();
+		var url = $("#file_url").val();
+		var str = "<p><span>Name:"+name+"</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>Url"+url+"</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>Size:0</span><input type="button" value="delete" onclick=''/></p>";
+		fileList.push({name:name, url:url});
+	}
+	
+
+	
+		
+	</script>
 </div>

@@ -13,3 +13,6 @@ mongoose.connect('mongodb://localhost/boox_server', function(err){
 
 require ("./sysUpdate");
 exports.SysUpdate = mongoose.model("SysUpdate");
+
+require('./file');
+exports.File = mongoose.model('File')
