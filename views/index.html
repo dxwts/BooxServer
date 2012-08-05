@@ -1,0 +1,15 @@
+<div>
+	
+	<form action="/addVersion" method="post">
+		<label for="version[name]">版本编号：</label>
+		<input name="version[name]" id="version[name]" type="text" />
+		<label for="version[url]">下载地址：</label>
+		<input name="version[url]" id="version[url]" type="text" />
+		<label for="version[change_log]">版本变更：</label>
+		<textarea name="version[change_log]" id="version[change_log]"></textarea>
+		<input type="submit" value="提交" />
+	</form>
+	
+	
+	<a href="/getLastVersion">getLastVersion</a>
+</div>
