@@ -9,8 +9,8 @@ exports.addVersion = SysUpdate.addVersion;
 exports.deleteVersion = SysUpdate.deleteVersion;
 exports.updateVersion = SysUpdate.updateVersion;
 exports.getVersionList = SysUpdate.getVersionList;
-exports.checkUpdate_beta = SysUpdate.checkUpdate;
-exports.getLastVersion_beta = SysUpdate.getLastVersion;
+exports.checkUpdate = SysUpdate.checkUpdate;
+exports.getLastVersion = SysUpdate.getLastVersion;
 exports.index = SysUpdate.index;
 exports.deleteVersion = SysUpdate.deleteVersion;
 
@@ -19,6 +19,7 @@ exports.deleteVersion = SysUpdate.deleteVersion;
  * no new version system: 1001
  */
 
+/*
 exports.checkUpdate = function(req, res) {
 	var dev_version = req.query.version;
 	if(dev_version < 20120805) {
@@ -62,3 +63,4 @@ exports.getLastVersion = function(req, res) {
 		}]
 	});
 };
+*/
