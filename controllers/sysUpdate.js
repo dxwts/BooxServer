@@ -22,19 +22,26 @@ module.exports = {
       SysUpdate.find({}, function (err, versions) {
           if(err) return next(err);
           if(!versions) {
-              res,send({versions : null});
+              res,send({status : "success", versions : null});
           }
           return version;
       });  
     },
 	getLastVersion : function (req, res) {
-		SysUpdate.findById(req.query._id, function (err, version) {
+	    if(req.query._id !== undefined) {
+	        id = req.query._id;
+	    
+	    console.log("get version id : "+id);
+		SysUpdate.findById(id, function (err, version) {
 			if(err) return next(err);
 			if(!version) {
-				res.send({version : null});
+				res.send({status : "success", version : null});
 			}
-			res.send({version: version});
+			res.send({status : "success", version: version});
 		});
+		} else {
+		    res.send({status : "failed" , info : "Parameter does not"})
+		}
 	},
 	addVersion : function (req, res) {
 		var sysUpdate = new SysUpdate();
@@ -69,6 +76,7 @@ module.exports = {
 		res.send({status: "success"});
 	},
 	checkUpdate : function (req, res) {
+	    if(req.query.version !== undefined && req.query.deviceVersion !== undefined) {
 		var currentVersion = req.query.version;
 		var deviceVersion = req.query.deviceVersion;
 		var code = 1001;
@@ -81,17 +89,19 @@ module.exports = {
 			}
 			for(var i = 0; i < list.length; i++) {
 				if(currentVersion < list[i].version) {
-				    console.log(list[i]);
 				    currentVersion = list[i].version;
 					newVersion = list[i];
 					code = 1000;
 				}
 			}
-		if(newVersion != null) {
+		if(newVersion !== null) {
 		  res.send({status:"success", code : code, version : newVersion.version, _id : newVersion._id});
 		} else {
 		    res.send({status:"success", code : code, version : "no version update"});
 		}
 		});
+		} else {
+		    res.send({status : "failed" , info : "Parameter does not"})
+		}
 	}
 }
