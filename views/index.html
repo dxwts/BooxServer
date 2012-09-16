@@ -1,0 +1,53 @@
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a href="/" class="brand">ONYX</a>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid">
+	<div class="span5">
+		<form action="/addVersion" method="post" class="well">
+			<label for="version[deviceVersion]">设备版本</label>
+			<input name="version[deviceVersion]" id="version[deviceVersion]" type="text" class="span4"/>
+			<label for="version[version]">系统版本</label>
+			<input type="date" name="version[version]" id="version[version]" class="span4"/>
+			<label for="version[url]">下载地址</label>
+			<input name="version[url]" id="version[url]" type="text" class="span4"/>
+			<label for="version[size]">文件大小</label>
+			<input name="version[size]" id="version[size]" type="text" class="span4"/>
+			<input type="submit" value="提交" class="btn-large btn-primary span4" />
+		</form>
+	</div>
+	<div class="well span6">
+<table class="table">
+              <thead>
+                <tr>
+                  <th>序号</th>
+                  <th>设备编号</th>
+                  <th>系统编号</th>
+                  <th>下载地址</th>
+                  <th>文件大小</th>
+                  <th>创建日期</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+               <%if(versions != null) {%>
+               <%for(var i = 0; i < versions.length; i++) {%>
+                <tr>
+                  <td><%=i%></td>
+                  <td><%=versions[i].deviceVersion%></td>
+                  <td><%=versions[i].version%></td>
+                  <td><%=versions[i].url%></td>
+                  <td><%=versions[i].size%></td>
+                  <td><%=versions[i].create_at%></td>
+                  <td><a href="/delete?_id=<%=versions[i]._id%>" class="btn btn-danger">delete</a></td>
+                </tr>
+                <%}%>
+               <%}%>
+              </tbody>
+            </table>
+	</div>
+</div>

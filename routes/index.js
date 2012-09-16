@@ -3,15 +3,16 @@
  * GET home page.
  */
 
-exports.index = function(req, res){
-  res.render('index')
-};
 
 var SysUpdate = require("../controllers/sysUpdate");
-exports.getLastVersion_beta = SysUpdate.getLastVersion;
 exports.addVersion = SysUpdate.addVersion;
 exports.deleteVersion = SysUpdate.deleteVersion;
 exports.updateVersion = SysUpdate.updateVersion;
+exports.getVersionList = SysUpdate.getVersionList;
+exports.checkUpdate_beta = SysUpdate.checkUpdate;
+exports.getLastVersion_beta = SysUpdate.getLastVersion;
+exports.index = SysUpdate.index;
+exports.deleteVersion = SysUpdate.deleteVersion;
 
 /*
  * have new version system : 1000
@@ -19,7 +20,7 @@ exports.updateVersion = SysUpdate.updateVersion;
  */
 
 exports.checkUpdate = function(req, res) {
-	var dev_version = req.body.version;
+	var dev_version = req.query.version;
 	if(dev_version < 20120805) {
 		res.send({status: 1000});
 	} else{
@@ -29,9 +30,11 @@ exports.checkUpdate = function(req, res) {
 
 exports.getLastVersion = function(req, res) {
 	res.send({
-		version: '2012/08/05更新',
+	    status:'Ok',
+		version: 'Onyx Os v0.1',
 		url: 'http://www.google.com',
 		size: '30.4M',
+		date: "20120915",
 		file: [
 		{
 			name: 'test1',

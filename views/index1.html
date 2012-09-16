@@ -1,49 +1,57 @@
-<div>
-	
-	<form action="/addVersion" method="post">
-		<label for="version[version]">版本编号：</label><br />
-		<input name="version[version]" id="version[version]" type="text" /><br />
-		<label for="version[version_date]">发布日期：</label><br />
-		<input type="date" name="version[date]" id="version[date]" /><br />
-		<label for="version[url]">下载地址：</label><br />
-		<input name="version[url]" id="version[url]" type="text" /><br />
-		<label for="version[change_log]">版本变更：</label><br />
-		<textarea name="version[change_log]" id="version[change_log]"></textarea><br />
-		<label>添加文件:</label><br />
-		<div class="file_list" id="file_list">
-			<p><span>name</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>Url</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>size</span><input type="button" value="delete" /></p>
-			<p><span>name</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>Url</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>size</span><input type="button" value="delete" /></p>
-			<p><span>name</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>Url</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>size</span><input type="button" value="delete" /></p>
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a href="/" class="brand">ONYX</a>
 		</div>
-		<input type="button" value="新文件" onclick="$('.new_div').show()"/><br />
-		<input type="submit" value="提交" />
-	</form>
-	
-	<div class="new_div">
-		<label for="file_name">文件名:</label><br />
-		<input type="text" name="file_name" id="file_name" /><br />
-		<label for="file_url">下载地址：</label><br />
-		<input type="text" name="file_url" id="file_url"/><br />
-		<input type="button" value="添加"  onclick="add_file()"/>
-		<input type="button" value="取消" onclick="$('.new_div').hide()"/>
 	</div>
-	<style>
-		.new_div{
-			display:none
-		}
-	</style>
-	
-	<script>
-	var fileList = new Array();
-	function add_file () {
-		var name = $("#file_name").val();
-		var url = $("#file_url").val();
-		var str = "<p><span>Name:"+name+"</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>Url"+url+"</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>Size:0</span><input type="button" value="delete" onclick=''/></p>";
-		fileList.push({name:name, url:url});
-	}
-	
+</div>
 
-	
-		
+<div class="container-fluid">
+	<div class="span6">
+		<form action="/addVersion" method="post" class="well">
+			<label for="version[version]">版本编号</label>
+			<input name="version[version]" id="version[version]" type="text" class="span4"/>
+			<label for="version[version_date]">发布日期</label>
+			<input type="date" name="version[version_date]" id="version[version_date]" class="span4"/>
+			<label for="version[url]">下载地址</label>
+			<input name="version[url]" id="version[url]" type="text" class="span4"/>
+			<label for="version[change_log]">版本变更</label>
+			<textarea name="version[change_log]" id="version[change_log]" class="span4"></textarea>
+			<input type="hidden" value="" id="files_array" name="version[files_array]"/>
+				<input type="submit" value="提交" class="btn-large btn-primary offset3" />
+		</form>
+	</div>
+	<div class="well span6">
+		<label>添加文件</label>
+		<div class=" form-inline">
+			<input name="file_name" id="file_name" type="text" class=" " placeholder="name"/>
+			<input name="file_url" id="file_url" type="text" class="" placeholder="url"/>
+			<button class="btn btn-success" onclick="add_file()">
+				添加
+			</button>
+		</div>
+		<ul id="file_list">
+
+		</ul>
+	</div>
+
+	<script>
+        var files = {files:[]};
+        function add_file() {
+            var file = {};
+            file.name = $("#file_name").val();
+            file.url = $("#file_url").val();
+            files.files.push(file);
+            var files_str = JSON.stringify(files);
+            $("#files_array").val(files_str);
+            console.log(files_str);
+            // alert($("#files_array").val());
+            var str = "<li><span>" + file.name + "</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>" + file.url + "</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='labellabel - important'>delete</span></li>"
+            $("#file_list").append(str).trigger('create');
+        }
+
+        function delete_file(file_index) {
+
+        }
 	</script>
 </div>
